@@ -1,6 +1,6 @@
 {
-  "scriptList": [
-      "__APPEND__",
-      "client/custom/modules/e-signature/lib/init.js"
-  ]
+    "scriptList": [
+        "__APPEND__",
+        "client/custom/modules/e-signature/lib/init.js"
+    ]
 }
