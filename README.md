@@ -2,6 +2,8 @@
 
 E-Signature extension providing electronic signature capabilities for EspoCRM.
 
+This extension enables the use of an electronic signature canvas field within EspoCRM, allowing users to capture signatures directly in the application. It also supports generating full-page documents that embed the captured signature, which can be printed or saved as PDF using the browser's built-in PDF functionality.
+
 ## Developer version
 
 ### Configuration and building
@@ -30,6 +32,18 @@ File watcher parameters for PhpStorm:
 * Working Directory: `$ProjectFileDir$`
 
 Note: The File Watcher configuration for PhpStorm is included in this repository.
+
+## Authors
+
+- [@tmachyshyn](https://github.com/tmachyshyn)
+- [@lithiuhm](https://github.com/Lithiuhm)
+- [@telecastg](https://github.com/telecastg)
+- [@bandtank](https://github.com/bandtank)
+
+## References
+
+- [Extension for EspoCRM v8](https://github.com/Lithiuhm/eSignature-extension-for-Espocrm)
+- [Original extension for EspoCRM OLD VERSIONS](https://github.com/EspoCRM-Custom-Modules/eSignature-for-Documents/tree/master)
 
 ## License
 
