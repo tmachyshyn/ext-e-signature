@@ -484,5 +484,13 @@
             ],
             "url": "https://raw.githubusercontent.com/espocrm/espocrm/master/schema/metadata/app/webSocket.json"
         }
-    ]
+    ],
+    "files.exclude": {
+        "**/build/**": true,
+        "**/site/build/**": true,
+        "**/site/custom/**": true,
+        "**/site/client/custom/**": true,
+        "**/site/tests/unit/Espo/Modules/ESignature/**": true,
+        "**/site/tests/integration/Espo/Modules/ESignature/**": true
+    }
 }

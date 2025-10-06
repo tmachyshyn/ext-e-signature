@@ -1,9 +1,9 @@
 {
-    "module": "{@name}",
-    "name": "{@nameLabel}",
-    "description": "{@description}",
-    "author": "{@author}",
-    "bundled": {@bundled},
+    "module": "ESignature",
+    "name": "E-Signature",
+    "description": "Electronic signature for EspoCRM.",
+    "author": "Taras Machyshyn, Lithiuhm, Omar A Gonsenheim",
+    "bundled": true,
     "acceptableVersions": [
         ">=9.1.0"
     ],
