@@ -1,5 +1,5 @@
 {
-    "module": "ESignature",
+    "module": "E-Signature",
     "name": "E-Signature",
     "description": "Electronic signature for EspoCRM.",
     "author": "Taras Machyshyn, Lithiuhm, Omar A Gonsenheim",
@@ -10,5 +10,7 @@
     "php": [
         ">=8.2"
     ],
-    "scripts": []
+    "scripts": [
+        "cp node_modules/jsignature/libs/jSignature.min.js build/assets/lib/jsignature-project.js"
+    ]
 }

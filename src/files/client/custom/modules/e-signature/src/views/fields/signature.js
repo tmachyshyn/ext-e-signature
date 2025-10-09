@@ -1,30 +1,15 @@
 /************************************************************************
- * This file is part of EspoCRM.
+ * This file is part of E-Signature extension for EspoCRM.
  *
- * EspoCRM - Open Source CRM application.
- * Copyright (C) 2014-2018 Yuri Kuznetsov, Taras Machyshyn, Oleksiy Avramenko
- * Website: http://www.espocrm.com
+ * Copyright (C) 2025 Taras Machyshyn
+ * Copyright (C) 2024 Lithiuhm
+ * Copyright (C) 2020 Omar A Gonsenheim
+ * Website: https://github.com/tmachyshyn/ext-e-signature
  *
- * EspoCRM is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * EspoCRM is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with EspoCRM. If not, see http://www.gnu.org/licenses/.
- *
- * The interactive user interfaces in modified source and object code versions
- * of this program must display Appropriate Legal Notices, as required under
- * Section 5 of the GNU General Public License version 3.
- *
- * In accordance with Section 7(b) of the GNU General Public License version 3,
- * these Appropriate Legal Notices must retain the display of the "EspoCRM" word.
+ * Licensed under the MIT License.
+ * See the LICENSE file for license information.
  ************************************************************************/
+
 /** @preserve
 jSignature v2 "${buildDate}" "${commitID}"
 Copyright (c) 2012 Willow Systems Corp http://willow-systems.com
@@ -32,19 +17,19 @@ Copyright (c) 2010 Brinley Ang http://www.unbolt.net
 MIT License <http://www.opensource.org/licenses/mit-license.php>
 */
 
-Espo.define('esignature:views/fields/esignature', 'views/fields/base', function (Dep) {
+Espo.define('e-signature:views/fields/signature', 'views/fields/base', function (Dep) {
 
     return Dep.extend({
-        
+
         // custom templates
-        detailTemplate: 'esignature:fields/esignature/detail',
-        editTemplate: 'esignature:fields/esignature/edit',
-        listTemplate: 'esignature:fields/esignature/list',
+        detailTemplate: 'e-signature:fields/signature/detail',
+        editTemplate: 'e-signature:fields/signature/edit',
+        listTemplate: 'e-signature:fields/signature/list',
 
         // custom properties
         blankCanvassCode: '',
-        
-        // custom methods        
+
+        // custom methods
         init: function () { // overrides "init" function from base.js
             if (this.events) {
                 this.events = _.clone(this.events);
@@ -88,7 +73,7 @@ Espo.define('esignature:views/fields/esignature', 'views/fields/base', function 
                 this.initTooltip();
             }
             // signature fields can only be edited inline
-            this.listenToOnce(this, 'after:render', this.initInlineEsignatureEdit, this);            
+            this.listenToOnce(this, 'after:render', this.initInlineEsignatureEdit, this);
             this.attributeList = this.getAttributeList();
             this.listenTo(this.model, 'change', function (model, options) {
                 if (this.isRendered() || this.isBeingRendered()) {
@@ -111,7 +96,7 @@ Espo.define('esignature:views/fields/esignature', 'views/fields/base', function 
                 this.model.set(attributes, {ui: true});
             });
         },
-        
+
         data: function () { // overrides "data" function from base.js
             var imageSource = this.getValueForDisplay();
             var data = {
@@ -120,8 +105,8 @@ Espo.define('esignature:views/fields/esignature', 'views/fields/base', function 
                 defs: this.defs,
                 params: this.params,
                 value: this.getValueForDisplay(),
-                imageSource: imageSource                
-            };   
+                imageSource: imageSource
+            };
             // signature fields can not be edited manually, force detail mode
             if(this.mode !== "detail") {
                 this.setMode("detail");
@@ -129,8 +114,10 @@ Espo.define('esignature:views/fields/esignature', 'views/fields/base', function 
             return data;
         },
 
-        initInlineEsignatureEdit: function () { // custom function equivalent to "initInlineEdit" at base.js   
-            var $cell = this.getCellElement();
+        initInlineEsignatureEdit: function () { // custom function equivalent to "initInlineEdit" at base.js
+            var cell = this.getCellElement();
+            let $cell = $(cell);
+
             var $editLink = $('<a href="javascript:" class="pull-right inline-edit-link hidden"><span class="fas fa-pencil-alt fa-sm"></span></a>');
             if ($cell.length === 0 || typeof(this.model.get(this.name))=== 'undefined') {
                 this.listenToOnce(this, 'after:render', this.initInlineEsignatureEdit, this);
@@ -139,14 +126,16 @@ Espo.define('esignature:views/fields/esignature', 'views/fields/base', function 
             // if the signature field already has a value do not add the inline edit link and set the field as readonly
             if(this.model.get(this.name)) {
                 this.readOnly = true;
-                return;                
+                return;
             }
             // after the element has been rendered, add the hidden pencil icon link
             $cell.prepend($editLink);
             $editLink.on('click', function () {
+                console
+
                 // when clicked, call the custom signature field inline edit function
-                this.inlineEsignatureEdit(); 
-            // bind the functionality to the pencil icon link    
+                this.inlineEsignatureEdit();
+            // bind the functionality to the pencil icon link
             }.bind(this));
             $cell.on('mouseenter', function (e) {
                 e.stopPropagation();
@@ -164,7 +153,7 @@ Espo.define('esignature:views/fields/esignature', 'views/fields/base', function 
             }.bind(this));
         },
 
-        inlineEsignatureEdit: function() { // custom function equivalent to "inlineEdit" at base.js            
+        inlineEsignatureEdit: function () { // custom function equivalent to "inlineEdit" at base.js
             // add css class esignature to the field element
             this.$el.addClass('eSignature');
             // initialize jSignature plug-in to display canvas input
@@ -172,9 +161,9 @@ Espo.define('esignature:views/fields/esignature', 'views/fields/base', function 
             // get the blank canvass code value to compare against a filled canvas
             this.blankCanvassCode = $sigDiv.jSignature('getData');
             // add the inline action links ("Update" and "Cancel")
-            this.addInlineEditLinks(); // function inherited from base.js               
+            this.addInlineEditLinks(); // function inherited from base.js
         },
-        
+
         inlineEditClose: function () { // substitutes same function at base.js
             this.trigger('inline-edit-off');
             this._isInlineEditMode = false;
@@ -185,20 +174,20 @@ Espo.define('esignature:views/fields/esignature', 'views/fields/base', function 
             // re-renders the entity in detail mode
             this.reRender(true);
         },
-        
-        inlineEditSave: function () { // substitutes same function at base.js   
-            // convert the canvas drawing to image code 
-            var imageCode = this.$el.jSignature('getData'); 
+
+        inlineEditSave: function () { // substitutes same function at base.js
+            // convert the canvas drawing to image code
+            var imageCode = this.$el.jSignature('getData');
             // compare the contents of the current vs blank canvass to make sure there's a signature to be saved
             console.log(imageCode)
             if(this.blankCanvassCode[1] === imageCode) {
                 alert("No signature was entered");
                 this.inlineEditClose();
                 return;
-            }  
+            }
             // register the signature time stamp
             var d = new Date();
-            var timestamp = eSignatureISODateString(d);             
+            var timestamp = this.eSignatureISODateString(d);
             // prepare the signature drawing to be stored in the database integrating the timestamp
             var imageSource = '<img src="'+this.$el.jSignature('getData')+'"/><div style=margin-top:-0.5em;font-size:1em;font-style:italic;>Electronically signed on '+timestamp+'</div>';
             this.notify('Saving...');
@@ -228,7 +217,17 @@ Espo.define('esignature:views/fields/esignature', 'views/fields/base', function 
             // set field as readonly
             this.readOnly = true;
             this.inlineEditClose();
-        }
-         
+        },
+
+        eSignatureISODateString: function(d) {
+            return d.getFullYear() + '-' + this.pad(d.getMonth() + 1) + '-' +
+                this.pad(d.getDate()) + ' ' + this.pad(d.getHours()) + ':' +
+                this.pad(d.getMinutes()) + ':' + this.pad(d.getSeconds());
+        },
+
+        pad: function (n) {
+            return n < 10 ? '0' + n : n;
+        },
+
     });
 });

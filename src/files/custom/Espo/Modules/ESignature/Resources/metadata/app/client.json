@@ -1,6 +1,19 @@
 {
     "scriptList": [
         "__APPEND__",
-        "client/custom/modules/e-signature/lib/init.js"
+        "client/custom/modules/e-signature/lib/init.js",
+        "client/custom/modules/e-signature/lib/jsignature-project.js"
+    ],
+    "developerModeScriptList": [
+        "__APPEND__",
+        "client/custom/modules/e-signature/lib/jsignature-project.js"
+    ],
+    "cssList": [
+        "__APPEND__",
+        "client/custom/modules/e-signature/css/e-signature.css"
+    ],
+    "developerModeCssList": [
+        "__APPEND__",
+        "client/custom/modules/e-signature/css/e-signature.css"
     ]
 }
