@@ -19,11 +19,6 @@ use Espo\Core\Htmlizer\Helper\Result;
 
 class Date implements Helper
 {
-    private const PATTERN_LIST = [
-        '/Electronically signed on (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/',
-        '/Firmado electrónicamente a (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/',
-    ];
-
     public function render(Data $data): Result
     {
         $color = $data->getOption('color');
@@ -36,14 +31,12 @@ class Date implements Helper
 
     private function getDateTimeFromText($text): string
     {
-        foreach (self::PATTERN_LIST as $pattern) {
-            if (!preg_match($pattern, $text, $matches)) {
-                continue;
-            }
+        $pattern = '/Electronically signed on (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/';
 
-            return $matches[1];
+        if (!preg_match($pattern, $text, $matches)) {
+            return '';
         }
 
-        return '';
+        return $matches[1];
     }
 }
