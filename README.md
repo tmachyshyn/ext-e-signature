@@ -10,17 +10,50 @@ This extension enables the use of an electronic signature canvas field within Es
 
 Follow the standard EspoCRM extension installation process to add the E-Signature extension to your instance.
 
-2. **Add the signature field**
-    In the EspoCRM Administration panel, customize the desired entity (e.g., Contact, Opportunity, Document) and add the "Signature" field to the layout using the Layout Manager.
+![installation](docs/images/installation.png?raw=true)
 
-3. **Capture a signature**
-    When viewing or editing a record with the signature field, users can draw their signature directly in the provided canvas area.
+### 2. Add the signature field
 
-4. **Save and view signatures**
-    After saving the record, the captured signature will be stored and displayed within the record details.
+In the EspoCRM Administration panel, customize the desired entity (e.g., Contact, Opportunity, Document) and add the "Signature" field to the layout using the Layout Manager.
 
-5. **Generate documents with embedded signatures**
-    Use the extension's document generation feature to create a full-page document that includes the captured signature. You can print or save this document as a PDF using your browser's print functionality.
+![configuration](docs/images/configuration-1.png?raw=true)
+![configuration](docs/images/configuration-2.png?raw=true)
+![configuration](docs/images/configuration-3.png?raw=true)
+![configuration](docs/images/configuration-4.png?raw=true)
+![configuration](docs/images/configuration-5.png?raw=true)
+![configuration](docs/images/configuration-6.png?raw=true)
+![configuration](docs/images/configuration-7.png?raw=true)
+![configuration](docs/images/configuration-8.png?raw=true)
+![configuration](docs/images/configuration-9.png?raw=true)
+
+### 3. Capture a signature
+
+When viewing or editing a record with the signature field, users can draw their signature directly in the provided canvas area.
+
+![capture](docs/images/capture-1.png?raw=true)
+
+### 4. Save and view signatures
+
+After saving the record, the captured signature will be stored and displayed within the record details.
+
+![capture](docs/images/capture-2.png?raw=true)
+
+### 5. Generate documents with embedded signatures
+
+Use the extension's document generation feature to create a full-page document that includes the captured signature. You can print or save this document as a PDF using your browser's print functionality.
+
+Available Placeholders:
+
+```
+<p><img src="{{eSignatureSign c<FIELD_NAME>}}"></p>
+
+<p>{{eSignatureDate c<FIELD_NAME>}}</p>
+```
+
+![document](docs/images/document-1.png?raw=true)
+![document](docs/images/document-2.png?raw=true)
+![document](docs/images/document-3.png?raw=true)
+![document](docs/images/document-4.png?raw=true)
 
 ## Developer version
 
