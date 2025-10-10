@@ -4,11 +4,44 @@ E-Signature extension providing electronic signature capabilities for EspoCRM.
 
 This extension enables the use of an electronic signature canvas field within EspoCRM, allowing users to capture signatures directly in the application. It also supports generating full-page documents that embed the captured signature, which can be printed or saved as PDF using the browser's built-in PDF functionality.
 
+## How to use
+
+### 1. Install the extension
+
+Follow the standard EspoCRM extension installation process to add the E-Signature extension to your instance.
+
+2. **Add the signature field**
+    In the EspoCRM Administration panel, customize the desired entity (e.g., Contact, Opportunity, Document) and add the "Signature" field to the layout using the Layout Manager.
+
+3. **Capture a signature**
+    When viewing or editing a record with the signature field, users can draw their signature directly in the provided canvas area.
+
+4. **Save and view signatures**
+    After saving the record, the captured signature will be stored and displayed within the record details.
+
+5. **Generate documents with embedded signatures**
+    Use the extension's document generation feature to create a full-page document that includes the captured signature. You can print or save this document as a PDF using your browser's print functionality.
+
 ## Developer version
 
 ### Configuration and building
 
 For more information, follow the [instructions](https://github.com/espocrm/ext-template?tab=readme-ov-file#configuration).
+
+### Recommended config
+
+> **Note:** Since the jSignature library requires jQuery out-of-the-box, it is recommended to keep `isDeveloperMode` set to `false`. This ensures proper loading of dependencies and stable operation of the extension.
+
+Create `config.php` in the root directory of the repository:
+
+```
+<?php
+
+return [
+    'useCache' => false,
+    'isDeveloperMode' => false,
+];
+```
 
 ### Configuring IDE
 
