@@ -5,10 +5,10 @@
     "author": "Taras Machyshyn, Lithiuhm, Omar A Gonsenheim",
     "bundled": true,
     "acceptableVersions": [
-        ">=9.1.0"
+        ">=8.4.0"
     ],
     "php": [
-        ">=8.2"
+        ">=8.1"
     ],
     "scripts": [
         "cp node_modules/jsignature/libs/jSignature.min.js build/assets/lib/jsignature-project.js"
