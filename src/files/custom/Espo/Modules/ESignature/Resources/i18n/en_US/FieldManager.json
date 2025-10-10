@@ -4,5 +4,8 @@
     },
     "fieldInfo": {
         "eSignature": "An electronic signature canvas field."
+    },
+    "messages": {
+        "recordMustBeSaved": "Record must be saved first"
     }
 }

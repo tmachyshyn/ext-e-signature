@@ -39,6 +39,14 @@ class SignatureFieldView extends BaseFieldView {
         this.setMode('detail');
 
         this.listenToOnce(this, 'after:render', this.initInlineEsignatureEdit, this);
+
+        this.listenToOnce(this, 'after:render', () => {
+            if (!this.model.isNew()) {
+                return;
+            }
+
+            this.disableButton();
+        }, this);
     }
 
     data() {
@@ -80,6 +88,12 @@ class SignatureFieldView extends BaseFieldView {
 
             return;
         }
+    }
+
+    disableButton() {
+        $(this.el).find('[data-action="sign"]')
+            .attr('disabled', 'disabled')
+            .attr('title', this.translate('recordMustBeSaved', 'messages', 'FieldManager'));
     }
 
     showButton() {
