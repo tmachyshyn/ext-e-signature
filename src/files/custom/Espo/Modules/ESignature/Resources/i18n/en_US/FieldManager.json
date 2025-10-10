@@ -1,4 +1,7 @@
 {
+    "labels": {
+        "Click to sign": "Click to sign"
+    },
     "fieldInfo": {
         "eSignature": "An electronic signature canvas field."
     }

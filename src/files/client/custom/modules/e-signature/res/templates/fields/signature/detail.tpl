@@ -6,7 +6,7 @@
             data-action="sign"
             class="btn btn-default"
             type="button"
-            title="{{translate 'Click to sign'}}"
-        >{{translate 'Click to sign'}}</button>
+            title="{{translate 'Click to sign' scope='FieldManager' category='labels'}}"
+        >{{translate 'Click to sign' scope='FieldManager' category='labels'}}</button>
     </div>
 {{/if}}
