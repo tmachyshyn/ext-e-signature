@@ -1,15 +1,9 @@
 {
-   "params":[
-   ],
+   "params": [],
    "notCreatable": false,
    "filter": false,
    "fieldDefs": {
-      "type": "text",
-      "notStorable": false
+      "type": "text"
    },
-   "view": "e-signature:views/fields/signature",
-   "textFilter": false,
-   "filter": false,
-   "fullTextSearch": false,
-   "readOnly": false
+   "view": "e-signature:views/fields/signature"
 }
