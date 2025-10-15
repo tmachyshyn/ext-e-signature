@@ -9,30 +9,36 @@
  * See the LICENSE file for license information.
  ************************************************************************/
 
-use Espo\Core\Utils\File\Manager as FileManager;
+use Espo\Core\Utils\Metadata;
 
 class BeforeUninstall
 {
-    private const ORIGINAL_FILE = 'custom/Espo/Modules/ESignature/Resources/metadata/fields/eSignature.json';
-
-    private const CUSTOM_PATH = 'custom/Espo/Custom/Resources/metadata/fields/';
+    private const CUSTOM_PATH = 'custom/Espo/Custom/Resources/metadata/fields/eSignature.json';
 
     public function run($container)
     {
         $this->container = $container;
 
-        /** @var FileManager $fileManager */
-        $fileManager = $container->get('fileManager');
+        /** @var Metadata $metadata */
+        $metadata = $container->get('metadata');
 
-       $this->fixUninstallationIssue($fileManager);
+       $this->fixUninstallationIssue($metadata);
     }
 
-    private function fixUninstallationIssue(FileManager $fileManager): void
+    private function fixUninstallationIssue(Metadata $metadata): void
     {
-        if (!$fileManager->exists(self::ORIGINAL_FILE)) {
+        if (file_exists(self::CUSTOM_PATH)) {
             return;
         }
 
-        $fileManager->copy(self::ORIGINAL_FILE, self::CUSTOM_PATH, false, null, true);
+        $metadata->saveCustom('fields', 'eSignature', [
+            'params' => [],
+            'notCreatable' => false,
+            'filter' => false,
+            'fieldDefs' => [
+                'type' => 'text'
+            ],
+            'view' => 'views/fields/text'
+        ]);
     }
 }
