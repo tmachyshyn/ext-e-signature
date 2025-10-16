@@ -7,6 +7,6 @@
     },
     "messages": {
         "recordMustBeSaved": "Record must be saved first",
-        "signedOn": "Electronically signed on"
+        "signedAt": "Electronically signed on"
     }
 }

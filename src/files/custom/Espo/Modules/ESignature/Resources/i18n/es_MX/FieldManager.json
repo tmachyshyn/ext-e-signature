@@ -7,6 +7,6 @@
     },
     "messages": {
         "recordMustBeSaved": "El registro debe guardarse primero",
-        "signedOn": "Firmado electrónicamente a"
+        "signedAt": "Firmado electrónicamente a"
     }
 }
