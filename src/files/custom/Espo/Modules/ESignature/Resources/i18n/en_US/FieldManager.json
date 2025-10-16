@@ -6,6 +6,7 @@
         "eSignature": "An electronic signature canvas field."
     },
     "messages": {
-        "recordMustBeSaved": "Record must be saved first"
+        "recordMustBeSaved": "Record must be saved first",
+        "signedOn": "Electronically signed on"
     }
 }

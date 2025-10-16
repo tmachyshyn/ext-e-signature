@@ -166,7 +166,10 @@ class SignatureFieldView extends BaseFieldView {
         let timestamp = this.eSignatureISODateString(d);
 
         // prepare the signature drawing to be stored in the database integrating the timestamp
-        let imageSource = '<img src="' + this.$el.jSignature('getData') + '"/><div style=margin-top:-0.5em;font-size:1em;font-style:italic;>Electronically signed on ' + timestamp + '</div>';
+        let imageSource = '<img src="' + this.$el.jSignature('getData') + '"/>' +
+            '<div style=margin-top:-0.5em;font-size:1em;font-style:italic;>' +
+                this.translate('signedOn', 'messages', 'FieldManager') + ' ' + timestamp +
+            '</div > ';
 
         Espo.Ui.notify(this.translate('Saving...'), 'success');
 
