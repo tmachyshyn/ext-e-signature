@@ -13,12 +13,25 @@
 
 namespace Espo\Modules\ESignature\Classes\TemplateHelpers;
 
+use Espo\Core\Utils\Metadata;
 use Espo\Core\Htmlizer\Helper;
 use Espo\Core\Htmlizer\Helper\Data;
 use Espo\Core\Htmlizer\Helper\Result;
+use Espo\Core\Utils\Language\LanguageFactory;
 
 class Date implements Helper
 {
+    private const LABEL_NAME = 'signedAt';
+
+    private const LABEL_CATEGORY = 'messages';
+
+    private const LABEL_SCOPE = 'FieldManager';
+
+    public function __construct(
+        private Metadata $metadata,
+        private LanguageFactory $languageFactory
+    ) {}
+
     public function render(Data $data): Result
     {
         $color = $data->getOption('color');
@@ -31,12 +44,33 @@ class Date implements Helper
 
     private function getDateTimeFromText($text): string
     {
-        $pattern = '/Electronically signed on (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/';
+        $labelList = $this->getLabelList();
 
-        if (!preg_match($pattern, $text, $matches)) {
-            return '';
+        foreach ($labelList as $label) {
+            $pattern = '/' . $label . ' (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/';
+
+            if (!preg_match($pattern, $text, $matches)) {
+                continue;
+            }
+
+            return $matches[1];
         }
 
-        return $matches[1];
+        return '';
+    }
+
+    private function getLabelList(): array
+    {
+        $languageList = $this->metadata->get(['app', 'language', 'list']) ?? [];
+
+        foreach ($languageList as $i18n) {
+            $label = $this->languageFactory
+                ->create($i18n)
+                ->translate(self::LABEL_NAME, self::LABEL_CATEGORY, self::LABEL_SCOPE);
+
+            $labelList[] = trim($label);
+        }
+
+        return array_unique($labelList);
     }
 }
