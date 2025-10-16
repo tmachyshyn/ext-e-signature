@@ -1,0 +1,12 @@
+{
+    "labels": {
+        "Click to sign": "Zum Unterschreiben hier klicken"
+    },
+    "fieldInfo": {
+        "eSignature": "Ein Feld für elektronische Signaturen."
+    },
+    "messages": {
+        "recordMustBeSaved": "Der Datensatz muss zuerst gespeichert werden",
+        "signedAt": "Elektronisch unterzeichnet am"
+    }
+}
