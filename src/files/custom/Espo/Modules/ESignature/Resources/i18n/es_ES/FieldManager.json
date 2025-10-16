@@ -1,0 +1,12 @@
+{
+    "labels": {
+        "Click to sign": "Haga clic para firmar"
+    },
+    "fieldInfo": {
+        "eSignature": "Un campo de lienzo para firma electrónica."
+    },
+    "messages": {
+        "recordMustBeSaved": "El registro debe guardarse primero",
+        "signedOn": "Firmado electrónicamente a"
+    }
+}
