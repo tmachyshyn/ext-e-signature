@@ -55,29 +55,33 @@ Available Placeholders:
 ![document](docs/images/document-3.png?raw=true)
 ![document](docs/images/document-4.png?raw=true)
 
-## Migration from v1 to v2 for E-Signature extension
+## Migration from v1 to v2
 
-### Option 1: for versions EspoCRM from v8.4.0 to v9.1.9
+> Before you begin
+> - Backup your database and files.
+> - Confirm your EspoCRM version to pick the correct migration path.
 
-1. In *Administration > Extensions* install E-Signature extension `2.0.0` to the previously installed `1.0.3`.
+### Option 1. For EspoCRM v8.4.0 - v9.1.9
+
+1\. Install the [latest version](https://github.com/tmachyshyn/ext-e-signature/releases) of **E-Signature** via `Administration` > `Extensions`, along with the existing v1.0.3.
 
 ![document](docs/images/administration-extensions.png?raw=true)
 
-2. In *Administration > Entity Manager > Your_entity_name* remove the field with `eSignature` type that was created in E-Signature extension `1.0.3`.
+2\. In `Administration` > `Entity Manager` > `<YOUR_ENTITY_NAME>`, remove the old field of type **eSignature** created by v1.
 
 ![document](docs/images/administration-entity-manager-your_entity_name-fields-remove-esignature.png?raw=true)
 
-3. Create a field with `E-Signature` type with the same **name** as in the previous step.
+3\. Create a new field of type **E-Signature** using the **same field name** as the removed one.
 
 ![document](docs/images/administration-entity-manager-document-fields-e-signature.png?raw=true)
 
-Additionally, in *Code View* of the previously created PDF Template for your entity, you can replace the old ***Placeholder*** from:
+4\. If you use **PDF Templates**, open the template Code View and replace the old placeholder:
 
 ```
 <img src="{{img_data ESIGNATUREGFILEDNAME}}">
 ```
 
-to
+with the new placeholders:
 
 ```
 <p><img src="{{eSignatureSign c<FIELD_NAME>}}"></p>
@@ -85,32 +89,33 @@ to
 <p>{{eSignatureDate c<FIELD_NAME>}}</p>
 ```
 
-### Option 2: for versions EspoCRM from v9.2.0
+5\. Verify signatures display correctly and test PDF generation.
 
-Since E-Signature extension `1.0.3` has stopped working on EspoCRM v9.2.0, perform the following steps:
+### Option 2. EspoCRM v9.2.0+
 
-1. In *Administration > Extensions* install E-Signature extension `2.0.0` to the previously installed `1.0.3`.
+Note: v1 (1.0.3) is not compatible with EspoCRM >= v9.2.0, so migrate data to a new field name.
+
+1\. Install the [latest version](https://github.com/tmachyshyn/ext-e-signature/releases) of **E-Signature** via `Administration` > `Extensions`, along with the existing v1.0.3.
 
 ![document](docs/images/administration-extensions.png?raw=true)
 
-2. In *Administration > Entity Manager > Your_entity_name* create a field with `E-Signature` type with a different **name** than you used in E-Signature extension `1.0.3`.
+2\. In `Administration` > `Entity Manager` > `<YOUR_ENTITY_NAME>`, create a new field of type **E-Signature** with a different name than the old field.
 
 ![document](docs/images/administration-entity-manager-document-fields-new-e-signature.png?raw=true)
 
-3. In *Administration > Entity Manager > Your_entity_name > Formula > Before Save Custom Script* create a formula that will copy data from the old field to the new one:
+3\. Add a formula in `Administration` > `Entity Manager` > `<YOUR_ENTITY_NAME>` > `Formula` > `Before Save Custom Script`:
 
 ```
 c<NewSignatureFieldName> = c<OldSignatureFieldName>;
-
 // c<OldSignatureFieldName> = null;  // Optional: clear the original value if it's no longer required
-```  
+```
 
-4. Go to the List view of your entity and in drop-down menu of ***Actions*** execute *Recalculate Formula* for desired entries.
+4\. In the List view for your entity, select the records to migrate (use filters or “Select All”), open the `Actions` dropdown and run `Recalculate Formula`.
 
 ![document](docs/images/your_entity_name-actions-recalculate-formula.png?raw=true)
 
-5. Remove the old `eSignature` type field from Entity Manager and Layout Manager.
-6. Remove E-Signature extension `1.0.3`.
+5\. Once confirmed, remove the old **eSignature** field from `Entity Manager` and `Layout Manager`.
+6\. Uninstall the E-Signature extension `1.0.3`.
 
 ## Developer version
 
