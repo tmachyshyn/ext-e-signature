@@ -106,8 +106,8 @@ Note: v1 (1.0.3) is not compatible with EspoCRM >= v9.2.0, so migrate data to a 
 3\. Add a formula in `Administration` > `Entity Manager` > `<YOUR_ENTITY_NAME>` > `Formula` > `Before Save Custom Script`:
 
 ```
-c<NewSignatureFieldName> = c<OldSignatureFieldName>;
-// c<OldSignatureFieldName> = null;  // Optional: clear the original value if it's no longer required
+<newSignatureFieldName> = <oldSignatureFieldName>;  // Example: cSign = cOldSign;
+// <oldSignatureFieldName> = null;  // Optional: clear the original value if it's no longer required
 ```
 
 4\. In the List view for your entity, select the records to migrate (use filters or “Select All”), open the `Actions` dropdown and run `Recalculate Formula`.
