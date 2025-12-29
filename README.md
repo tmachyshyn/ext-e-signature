@@ -45,9 +45,9 @@ Use the extension's document generation feature to create a full-page document t
 Available Placeholders:
 
 ```
-<p><img src="{{eSignatureSign c<FIELD_NAME>}}"></p>
+<p><img src="{{eSignatureSign <fieldName>}}"></p>
 
-<p>{{eSignatureDate c<FIELD_NAME>}}</p>
+<p>{{eSignatureDate <fieldName>}}</p>
 ```
 
 ![document](docs/images/document-1.png?raw=true)
@@ -84,9 +84,9 @@ Available Placeholders:
 with the new placeholders:
 
 ```
-<p><img src="{{eSignatureSign c<FIELD_NAME>}}"></p>
+<p><img src="{{eSignatureSign <fieldName>}}"></p>
 
-<p>{{eSignatureDate c<FIELD_NAME>}}</p>
+<p>{{eSignatureDate <fieldName>}}</p>
 ```
 
 5\. Verify signatures display correctly and test PDF generation.
